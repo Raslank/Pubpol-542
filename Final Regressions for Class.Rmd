@@ -1,0 +1,82 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+link='https://github.com/sanjp0594/PUBPOL542-Data/raw/master/FinalFile.RDS'
+
+myFile=url(link)
+
+
+fromPy=readRDS(file = myFile)
+row.names(fromPy)=NULL
+```
+
+
+```{r}
+Hypo1=formula(Paris_OA~  + X2019Score)
+Hypo2=formula(Paris_OA~  + X2019Score + Population)
+Hypo3=formula(Paris_OA~  + X2019Score + Population + GDPperCapita)
+Hypo4=formula(Paris_OA~  + X2019Score + bci_bci + Population + GDPperCapita)
+Hypo5=formula(Paris_OA~  + X2019Score + bci_bci + cspf_sfi  + Population + GDPperCapita)
+Hypo6=formula(Paris_OA~  + X2019Score + bci_bci+ egov_egov.y + Population + GDPperCapita)
+
+```
+
+```{r}
+Logi1=glm(Hypo1,data = fromPy,family = "binomial")
+Logi2=glm(Hypo2,data = fromPy,family = "binomial")
+Logi3=glm(Hypo3,data = fromPy,family = "binomial")
+Logi4=glm(Hypo4,data = fromPy,family = "binomial")
+Logi5=glm(Hypo5,data = fromPy,family = "binomial")
+Logi6=glm(Hypo6,data = fromPy,family = "binomial")
+
+```
+
+```{r}
+
+```
+
+
+```{r}
+summary(Logi1)
+summary(Logi2)
+summary(Logi3)
+summary(Logi4)
+summary(Logi5)
+summary(Logi6)
+```
+
+```{r}
+#library(lmtest)
+anova(Logi1,Logi2, test="LRT")
+```
+```{r}
+anova(Logi2,Logi3, test="LRT")
+```
+
+```{r}
+
+anova(Logi3,Logi4, test="LRT")
+
+```
+
+```{r}
+anova(Logi4,Logi5, test="LRT")
+```
+
+```{r}
+anova(Logi5,Logi6, test="LRT")
+```
+```{r}
+plot(Logi4)
+```
+
+```{r}
+plot(Logi5)
+```
+
+```{r}
+plot(Logi6)
+```
